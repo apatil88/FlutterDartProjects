@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' show get; //We only need this function
+import 'models/image_model.dart';
+import 'dart:convert';
+import 'widgets/image_list.dart';
 
 class App extends StatefulWidget {
   @override
@@ -10,10 +13,16 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   int counter = 0;
+  List<ImageModel> images = [];
 
-  void fetchImage() {
+  void fetchImage() async {
     counter += 1;
-    get('http://jsonplaceholder.typicode.com/photos/${counter}');
+    var response =
+        await get('http://jsonplaceholder.typicode.com/photos/${counter}');
+    var imageModel = ImageModel.fromJson(json.decode(response.body));
+    setState(() {
+      images.add(imageModel);
+    });
   }
 
   Widget build(context) {
@@ -26,7 +35,7 @@ class AppState extends State<App> {
           onPressed: fetchImage, //Call the function to fetch image data
           child: Icon(Icons.add),
         ),
-        body: Text('${counter} images'),
+        body: ImageList(images),
       ),
     );
   }
