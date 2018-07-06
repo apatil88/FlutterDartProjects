@@ -1,6 +1,6 @@
 # pics
 
-A Flutter app to demonstrate use of widgets, single-child layout and multi-child layout and fetching image data from a third-party API.
+A Flutter app to demonstrate use of widgets, single-child and multi-child layout and fetching image data from a third-party API.
 
 <b>Technologies and Tools:</b> Dart, Flutter, VS Code, Android Emulator
 
