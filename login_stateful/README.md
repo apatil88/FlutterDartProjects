@@ -1,6 +1,6 @@
 # login_stateful
 
-Flutter App to demonstrate Form Validation.
+Flutter App to demonstrate state management during form validation using Stateful Widgets.
 
 <b>Technologies and Tools:</b> Dart, Flutter, VS Code, Android Emulator
 
