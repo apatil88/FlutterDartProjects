@@ -7,7 +7,7 @@ class Bloc extends Object with Validators {
       String>(); //Since we will only be dealing with string data
   final _passwordController = StreamController<String>();
 
-  //Retreive data to the stream
+  //Retreive data from the stream
   Stream<String> get email => _emailController.stream
       .transform(validateEmail); //Return the transformed stream
   Stream<String> get password =>
@@ -22,3 +22,6 @@ class Bloc extends Object with Validators {
     _passwordController.close();
   }
 }
+
+//Single Global Instance of Bloc
+final bloc = Bloc();
