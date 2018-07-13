@@ -65,7 +65,7 @@ class LoginScreen extends StatelessWidget {
           child: Text('Login'),
           color: Colors.blue,
           onPressed: snapshot.hasData
-              ? () {}
+              ? bloc.submit
               : null, //Disable the button if there is an error
         );
       },
