@@ -1,8 +1,9 @@
 # login_bloc
 
-A new Flutter project.
+Flutter App to demonstrate state management during form validation using BLOC pattern.
 
-## Getting Started
+<b>Technologies and Tools:</b> Dart, Flutter, RxDart, VS Code, Android Emulator
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+<img src="https://github.com/apatil88/FlutterDartProjects/blob/master/login_bloc/Screenshot_1531504135.png" height="500px" /> &nbsp;
+<img src="https://github.com/apatil88/FlutterDartProjects/blob/master/login_bloc/Screenshot_1531504150.png" height="500px" /> &nbsp;
+<img src="https://github.com/apatil88/FlutterDartProjects/blob/master/login_bloc/Screenshot_1531504150.png" height="500px" />
