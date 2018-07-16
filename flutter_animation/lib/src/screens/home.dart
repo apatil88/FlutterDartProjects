@@ -19,11 +19,11 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
     super.initState();
 
     catController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 200),
       vsync: this, //Mixed in TickerProvider to our current class
     );
 
-    catAnimation = Tween(begin: 0.0, end: 100.0).animate(
+    catAnimation = Tween(begin: -35.0, end: -80.0).animate(
       CurvedAnimation(
         //rate at which the animated value changes
         parent: catController,
@@ -47,22 +47,41 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
           title: Text('Cat\'s Out of the Box'),
         ),
         body: GestureDetector(
-          child: buildAnimation(),
+          child: Center(
+            child: Stack(
+              children: <Widget>[
+                buildBox(),
+                buildCatAnimation(), //cat will be at the bottom of the stack
+              ],
+              overflow: Overflow.visible,
+            ),
+          ),
           onTap: onTap,
         ));
   }
 
-  Widget buildAnimation() {
+  Widget buildCatAnimation() {
     return AnimatedBuilder(
       animation: catAnimation,
       builder: (context, child) {
-        return Container(
+        return Positioned(
           child: child,
-          margin: EdgeInsets.only(top: catAnimation.value),
+          top: catAnimation
+              .value, //move the cat. Position the cat without changing the dimensions of the stack.
+          right: 0.0,
+          left: 0.0,
         );
       }, //child is used for performance since we want to prevent complete re-rendering of Cat for every animation tick and just work with a some particular widget property
       child:
           Cat(), //Single instance of Cat is going to be repeatedly passed into the builder function everytime the animation udpates
+    );
+  }
+
+  Widget buildBox() {
+    return Container(
+      width: 200.0,
+      height: 200.0,
+      color: Colors.brown,
     );
   }
 }
