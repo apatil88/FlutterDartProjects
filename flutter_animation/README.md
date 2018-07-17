@@ -1,8 +1,5 @@
 # flutter_animation
 
-A new Flutter project.
+Flutter App to demonstrate animation and gesture detection.
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+<b>Technologies and Tools:</b> Dart, Flutter, VS Code, Android Emulator
