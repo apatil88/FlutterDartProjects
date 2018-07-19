@@ -1,6 +1,6 @@
-# login_bloc
+# login_navigate_state_mgmt
 
-Flutter App to demonstrate state management during form validation using BLOC pattern.
+Flutter App to demonstrate navigation and state management during form validation using BLOC pattern.
 
 <b>Technologies and Tools:</b> Dart, Flutter, RxDart, VS Code, Android Emulator
 
