@@ -1,6 +1,6 @@
 # login_bloc
 
-Flutter App to demonstrate state management during form validation using BLOC pattern.
+Flutter App to demonstrate state management during form validation using BLoC pattern.
 
 <b>Technologies and Tools:</b> Dart, Flutter, RxDart, VS Code, Android Emulator
 
