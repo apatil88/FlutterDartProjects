@@ -1,36 +1,46 @@
 import 'package:flutter/material.dart';
-import '../blocs/bloc.dart';
-import '../blocs/provider.dart';
+import '../blocs/state_mgmt_bloc.dart';
+import '../blocs/application_state_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(context) {
-    final bloc = Provider.of(context); //Get access to the bloc in the Provider
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      child: Column(
-        children: <Widget>[
-          emailField(bloc),
-          passwordField(bloc),
-          Container(margin: EdgeInsets.only(top: 25.0)),
-          submitButton(bloc),
-        ],
+    final stateMgmtBloc = ApplicationStateProvider
+        .of(context); //Get access to the bloc in the Provider
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('State Mgmt. Inherited Widgets Demo'),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(30.0),
+        child: Column(
+          children: <Widget>[
+            emailField(stateMgmtBloc),
+            SizedBox(
+              height: 10.0,
+            ),
+            passwordField(stateMgmtBloc),
+            SizedBox(
+              height: 40.0,
+            ),
+            loginButton(stateMgmtBloc),
+          ],
+        ),
       ),
     );
   }
 
-  Widget emailField(Bloc bloc) {
+  Widget emailField(StateMgmtBloc stateMgmtBloc) {
     return StreamBuilder(
-      stream: bloc.email,
-      builder: (context, snapshot) {
-        //
+      stream: stateMgmtBloc.emailStream,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         //Anytime the builder sees new data in the emailStream, it will re-render the TextField widget
         return TextField(
-          onChanged: bloc
-              .changeEmail, //Wire up TextField widget to the email stream and add the email to the stream sink
+          onChanged: stateMgmtBloc
+              .updateEmail, //Wire up TextField widget to the email stream and add the email to the stream sink
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            hintText: 'you@example.com',
+            hintText: 'email@xyz.com',
             labelText: 'Email Address',
             errorText: snapshot
                 .error, //retrieve the error message from the stream and display it
@@ -40,15 +50,15 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget passwordField(Bloc bloc) {
+  Widget passwordField(StateMgmtBloc stateMgmtBloc) {
     return StreamBuilder(
-      stream: bloc.password,
-      builder: (context, snapshot) {
+      stream: stateMgmtBloc.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         return TextField(
-          onChanged: bloc.changePassword,
+          onChanged: stateMgmtBloc.updatePassword,
           obscureText: true,
           decoration: InputDecoration(
-            hintText: 'password',
+            hintText: 'Enter Password',
             labelText: 'Password',
             errorText: snapshot.error,
           ),
@@ -57,15 +67,16 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget submitButton(Bloc bloc) {
+  Widget loginButton(StateMgmtBloc stateMgmtBloc) {
     return StreamBuilder(
-      stream: bloc.submitValid,
-      builder: (context, snapshot) {
+      stream: stateMgmtBloc.submitValid,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         return RaisedButton(
-          child: Text('Login'),
+          child: Text('Login and navigate to Second Screen'),
           color: Colors.blue,
           onPressed: snapshot.hasData
-              ? bloc.submit
+              ? () => Navigator.pushNamed(context,
+                  "/secondscreen") //If both email and password are valid, enable login button. Navigate to second screen when user presses the login button
               : null, //Disable the button if there is an error
         );
       },
