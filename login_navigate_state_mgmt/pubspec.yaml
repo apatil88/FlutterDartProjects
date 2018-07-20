@@ -1,4 +1,4 @@
-name: login_bloc
+name: login_navigate_state_mgmt
 description: A new Flutter project.
 
 dependencies:
