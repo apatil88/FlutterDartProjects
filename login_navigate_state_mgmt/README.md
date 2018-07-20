@@ -10,6 +10,6 @@ Flutter App to demonstrate navigation and state management during form validatio
 
 # Medium Article
 
-I go over building this app and discuss in detail about State Management Using BLoC Pattern in Flutter in my article published by ITNEXT on Medium. If you would like to learn more, feel free to visit my <a href="https://itnext.io/state-management-using-bloc-pattern-in-flutter-390d4056006f"> article </a>.
+I go over building this app and discuss in detail about State Management Using BLoC Pattern in Flutter in my article published by <a href="https://itnext.io/about-itnext-877f4197e8f6">ITNEXT</a> on Medium. If you would like to learn more, feel free to visit my <a href="https://itnext.io/state-management-using-bloc-pattern-in-flutter-390d4056006f"> article </a>.
 
 Thank you for your time.
