@@ -10,7 +10,8 @@ class NewsApiProvider {
 
   fetchTopIds() async {
     final response = await client.get('${_ROOT_URL}/topstories.json');
-    final ids = json.decode(response.body);
+    final ids = json.decode(
+        response.body); //Convert response from API into ItemModel instance
 
     return ids;
   }
@@ -19,6 +20,7 @@ class NewsApiProvider {
     final response = await client.get('${_ROOT_URL}/item/${id}.json');
     final parsedJson = json.decode(response.body);
 
-    return ItemModel.fromJson(parsedJson);
+    return ItemModel.fromJson(
+        parsedJson); //Convert response from API into ItemModel instance
   }
 }
