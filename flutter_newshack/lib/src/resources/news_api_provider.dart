@@ -14,7 +14,7 @@ class NewsApiProvider {
     final ids = json.decode(
         response.body); //Convert response from API into ItemModel instance
 
-    return ids;
+    return ids.cast<int>();
   }
 
   Future<ItemModel> fetchItem(int id) async {
