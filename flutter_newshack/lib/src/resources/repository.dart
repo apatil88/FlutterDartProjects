@@ -15,7 +15,7 @@ class Repository {
     newsDbProvider, //use the single instance of NewsDbProvider
   ];
 
-  //TODO: Iterate over sources when fetchTopIds() is implemented in NewsDbProvider
+  //Needs some work: Iterate over sources when fetchTopIds() is implemented in NewsDbProvider
   Future<List<int>> fetchTopIds() {
     return sources[1].fetchTopIds();
   }
