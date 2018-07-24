@@ -13,7 +13,7 @@ class ItemModel {
   final String url;
   final int score;
   final String title;
-  final List<dynamic> descendants;
+  final int descendants;
 
   //Decode JSON coming from API response and put in Model class
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
@@ -31,7 +31,7 @@ class ItemModel {
         url = parsedJson['url'],
         score = parsedJson['score'],
         title = parsedJson['title'],
-        descendants = parsedJson['descendants'];
+        descendants = parsedJson['descendants'] ?? 0;
 
   //Massage response from Db for certain fields
   ItemModel.fromDb(Map<String, dynamic> parsedJson)
