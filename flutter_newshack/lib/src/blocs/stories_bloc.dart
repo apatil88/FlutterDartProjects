@@ -7,8 +7,22 @@ class StoriesBloc {
   final _repository = Repository();
   final _topIds = PublishSubject<List<int>>(); //StreamController
 
+  //Item Controller which every StreamBuilder widget listens to
+  final _itemsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
+
+  //StreamController used to pump ids
+  final _itemsFetcher = PublishSubject<int>();
+
   //Getters to Streams
   Observable<List<int>> get topIds => _topIds.stream;
+  Observable<Map<int, Future<ItemModel>>> get items => _itemsOutput.stream;
+
+  //Getters to Sinks
+  Function(int) get fetchItem => _itemsFetcher.sink.add;
+
+  StoriesBloc() {
+    _itemsFetcher.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
+  }
 
   //Get list of Ids from the Repository and add it to the sink on our topIds StreamController
   fetchTopIds() async {
@@ -18,7 +32,7 @@ class StoriesBloc {
 
   _itemsTransformer() {
     return ScanStreamTransformer(
-      //cache is used by each StreamBuilder while rebuilding for specific id
+      //cache is used by each StreamBuilder while rebuilding widget for specific id
       (Map<int, Future<ItemModel>> cache, int id, _) {
         cache[id] = _repository.fetchItem(id);
         return cache; //cache gets persisted everytime this transformer gets called.
@@ -29,5 +43,7 @@ class StoriesBloc {
 
   dispose() {
     _topIds.close();
+    _itemsFetcher.close();
+    _itemsOutput.close();
   }
 }
