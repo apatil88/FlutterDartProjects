@@ -30,6 +30,10 @@ class StoriesBloc {
     _topIds.sink.add(ids);
   }
 
+  clearCache() {
+    return _repository.clearCache();
+  }
+
   _itemsTransformer() {
     return ScanStreamTransformer(
       //cache is used by each StreamBuilder while rebuilding widget for specific id

@@ -64,6 +64,10 @@ class NewsDbProvider implements Source, Cache {
         conflictAlgorithm: ConflictAlgorithm
             .ignore); //if there is an id in the db that already exist, ignore and move on
   }
+
+  Future<int> clear() {
+    return db.delete("Items");
+  }
 }
 
 //Create a single instance so that we do not accidentally open multiple db connections to the same database
