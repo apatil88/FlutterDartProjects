@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'screens/news_list.dart';
 import 'screens/news_detail.dart';
 import 'blocs/stories_provider.dart';
+import 'blocs/comments_provider.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoriesProvider(
-      child: MaterialApp(
-        title: 'NewsHack',
-        onGenerateRoute: routes,
+    return CommentsProvider(
+      child: StoriesProvider(
+        child: MaterialApp(
+          title: 'NewsHack',
+          onGenerateRoute: routes,
+        ),
       ),
     );
   }
@@ -26,6 +29,11 @@ class App extends StatelessWidget {
         builder: (context) {
           final itemId = int.parse(settings.name
               .replaceFirst('/', '')); //parse /id to grab just the id
+
+          //Kick off the recursive data fetching process
+          final commentsBloc = CommentsProvider.of(context);
+          commentsBloc.fetchItemWithComments(itemId);
+
           return NewsDetail(
             itemId: itemId,
           );

@@ -4,6 +4,7 @@ import '../models/item_model.dart';
 import '../resources/repository.dart';
 
 class CommentsBloc {
+  final _repository = Repository();
   final _commentsFetcher = PublishSubject<int>();
   final _commentsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
 
@@ -20,7 +21,21 @@ class CommentsBloc {
         .pipe(_commentsOutput);
   }
 
-  _commentsTransformer() {}
+  _commentsTransformer() {
+    return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
+      //id here is the id of the story
+      (cache, int id, index) {
+        print(index); //Number of time ScanStreamTransformer gets called
+        //Recursive Data Fetching
+        cache[id] = _repository.fetchItem(id);
+        cache[id].then((ItemModel item) {
+          item.kids.forEach((kidId) => fetchItemWithComments(kidId));
+        });
+        return cache;
+      },
+      <int, Future<ItemModel>>{},
+    );
+  }
 
   dispose() {
     _commentsFetcher.close();
