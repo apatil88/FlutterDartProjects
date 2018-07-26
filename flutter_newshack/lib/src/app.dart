@@ -30,7 +30,7 @@ class App extends StatelessWidget {
           final itemId = int.parse(settings.name
               .replaceFirst('/', '')); //parse /id to grab just the id
 
-          //Kick off the recursive data fetching process
+          //Kick off the recursive data fetching process so that we have the item with comments data when the news detail screen loads
           final commentsBloc = CommentsProvider.of(context);
           commentsBloc.fetchItemWithComments(itemId);
 
