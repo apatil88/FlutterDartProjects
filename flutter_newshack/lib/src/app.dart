@@ -21,6 +21,10 @@ class App extends StatelessWidget {
     if (settings.name == '/') {
       return MaterialPageRoute(
         builder: (context) {
+          //Kick off the top stories fetching process
+          final storiesBloc = StoriesProvider.of(context);
+          storiesBloc.fetchTopIds();
+
           return NewsList();
         },
       );
